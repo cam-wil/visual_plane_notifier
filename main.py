@@ -47,39 +47,39 @@ def mode_calc(dist):
     global working_dst
     print("mode_calc: " + str(dist))
     if working_dst >= 0 and working_dst < 7:
-        if(current_mode not 8):
+        if(current_mode != 8):
             set_mode(8)
             current_mode = 8
     elif working_dst >= 7 and working_dst < 14:
-        if(current_mode not 7):
+        if(current_mode != 7):
             set_mode(7)
             current_mode = 7
     elif working_dst >= 14 and working_dst < 21:
-        if(current_mode not 6):
+        if(current_mode != 6):
             set_mode(6)
             current_mode = 6
     elif working_dst >= 21 and working_dst < 28:
-        if(current_mode not 5):
+        if(current_mode != 5):
             set_mode(5)
             current_mode = 5
     elif working_dst >= 28 and working_dst < 35:
-        if(current_mode not 4):
+        if(current_mode != 4):
             set_mode(4)
             current_mode = 4
     elif working_dst >= 35 and working_dst < 42:
-        if(current_mode not 3):
+        if(current_mode != 3):
             set_mode(3)
             current_mode = 3
     elif working_dst >= 42 and working_dst < 49:
-        if(current_mode not 2):
+        if(current_mode != 2):
             set_mode(2)
             current_mode = 2
     elif working_dst >= 49 and working_dst < 56:
-        if(current_mode not 1):
+        if(current_mode != 1):
             set_mode(1)
             current_mode = 1
     elif working_dst >= 56 and working_dst < 300:
-        if(current_mode not 0):
+        if(current_mode != 0):
             set_mode(0)
             current_mode = 0
         
