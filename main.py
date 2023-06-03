@@ -32,7 +32,7 @@ def set_color(p,r,g,b): #position, red, green, blue
 def set_all(r,g,b): #position, red, green, blue
    print("set_all")
    for i in range(num_pixels):
-       pixels[p] = (r,g,b)
+       pixels[i] = (r,g,b)
    pixels.show()
 
 def clear_all():
@@ -142,7 +142,7 @@ def start_socket():
                     print("r_dst: " + str(dat["r_dst"]))
                     mode_calc(working_dst)
             except Exception as e:
-                print("Exception in start_socket: " + e)
+                print(e)
             if time() > trig_time:
                print("clear all in time trigger")
                clear_all()
@@ -156,7 +156,9 @@ for i in range(10):
         set_all(200,0,0)
     else:
         set_all(0,200,0)
-    time.sleep(0.5)
-    startup_toggle = !startup_toggle
+    sleep(0.5)
+    startup_toggle = not startup_toggle
+
+clear_all()
 
 threading.Thread(target=start_socket).start()
