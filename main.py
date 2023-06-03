@@ -29,6 +29,12 @@ def set_color(p,r,g,b): #position, red, green, blue
    pixels[p] = (r,g,b)
    pixels.show()
 
+def set_all(r,g,b): #position, red, green, blue
+   print("set_all")
+   for i in range(num_pixels):
+       pixels[p] = (r,g,b)
+   pixels.show()
+
 def clear_all():
     print("clear_all")
     for i in range(num_pixels):
@@ -124,7 +130,7 @@ def start_socket():
         sleep(4)
 
         while True:
-            data = s.recv(1024 * 6)
+            data = s.recv(1024 * 10)
             try:
                 dat = json.loads(data)
                 #print(str(dat["hex"]) + " " + str(dat["r_dst"]))
@@ -136,13 +142,21 @@ def start_socket():
                     print("r_dst: " + str(dat["r_dst"]))
                     mode_calc(working_dst)
             except Exception as e:
-                print(e)
-            #if time() > trig_time:
-            #    print("clear all in time trigger")
-            #    clear_all()
-            #else:
-            #    if working_dst != 999.9:
-            #        print("trying to set working distance mode: " + str(working_dst))
-            #    mode_calc(working_dst)
+                print("Exception in start_socket: " + e)
+            if time() > trig_time:
+               print("clear all in time trigger")
+               clear_all()
+
+
+# startup sequence
+startup_toggle = False
+for i in range(10):
+    clear_all()
+    if startup_toggle:
+        set_all(200,0,0)
+    else:
+        set_all(0,200,0)
+    time.sleep(0.5)
+    startup_toggle = !startup_toggle
 
 threading.Thread(target=start_socket).start()
