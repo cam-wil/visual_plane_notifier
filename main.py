@@ -122,6 +122,7 @@ def set_mode(mode): #mode 0 - 8. Increasing mode with closer plane
         set_color(7,125,0,0)
         set_color(8,125,0,0)
         
+trigger_cleared = False
 def start_socket():
     global working_dst
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -141,11 +142,13 @@ def start_socket():
                     working_dst = float(dat["r_dst"])
                     print("r_dst: " + str(dat["r_dst"]))
                     mode_calc(working_dst)
+                    trigger_cleared = False
             except Exception as e:
                 print(e)
-            if time() > trig_time:
+            if time() > trig_time and not trigger_cleared:
                print("clear all in time trigger")
                clear_all()
+               trigger_cleared = not trigger_cleared
 
 
 # startup sequence
