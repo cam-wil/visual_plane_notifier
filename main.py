@@ -122,9 +122,10 @@ def set_mode(mode): #mode 0 - 8. Increasing mode with closer plane
         set_color(7,125,0,0)
         set_color(8,125,0,0)
         
-trigger_cleared = False
+
 def start_socket():
     global working_dst
+    trigger_cleared = False
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
         trig_time = time() - (60*4)
