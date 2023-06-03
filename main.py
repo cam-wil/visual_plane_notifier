@@ -41,27 +41,47 @@ def clear_all():
         pixels[i] = (0,0,0)
     pixels.show()
 
+current_mode = -1
 def mode_calc(dist):
+    global current_mode
     global working_dst
     print("mode_calc: " + str(dist))
-    if working_dst >= 0 and working_dst < 5:
-        set_mode(8)
-    elif working_dst >= 5 and working_dst < 10:
-        set_mode(7)
-    elif working_dst >= 10 and working_dst < 15:
-        set_mode(6)
-    elif working_dst >= 15 and working_dst < 20:
-        set_mode(5)
-    elif working_dst >= 20 and working_dst < 25:
-        set_mode(4)
-    elif working_dst >= 25 and working_dst < 30:
-        set_mode(3)
-    elif working_dst >= 30 and working_dst < 40:
-        set_mode(2)
-    elif working_dst >= 40 and working_dst < 60:
-        set_mode(1)
-    elif working_dst >= 60 and working_dst < 300:
-        set_mode(0)
+    if working_dst >= 0 and working_dst < 7:
+        if(current_mode not 8):
+            set_mode(8)
+            current_mode = 8
+    elif working_dst >= 7 and working_dst < 14:
+        if(current_mode not 7):
+            set_mode(7)
+            current_mode = 7
+    elif working_dst >= 14 and working_dst < 21:
+        if(current_mode not 6):
+            set_mode(6)
+            current_mode = 6
+    elif working_dst >= 21 and working_dst < 28:
+        if(current_mode not 5):
+            set_mode(5)
+            current_mode = 5
+    elif working_dst >= 28 and working_dst < 35:
+        if(current_mode not 4):
+            set_mode(4)
+            current_mode = 4
+    elif working_dst >= 35 and working_dst < 42:
+        if(current_mode not 3):
+            set_mode(3)
+            current_mode = 3
+    elif working_dst >= 42 and working_dst < 49:
+        if(current_mode not 2):
+            set_mode(2)
+            current_mode = 2
+    elif working_dst >= 49 and working_dst < 56:
+        if(current_mode not 1):
+            set_mode(1)
+            current_mode = 1
+    elif working_dst >= 56 and working_dst < 300:
+        if(current_mode not 0):
+            set_mode(0)
+            current_mode = 0
         
 def set_mode(mode): #mode 0 - 8. Increasing mode with closer plane
     print("set mode: " + str(mode))
@@ -137,7 +157,7 @@ def start_socket():
                 dat = json.loads(data)
                 #print(str(dat["hex"]) + " " + str(dat["r_dst"]))
                 #if (dat["hex"][:2] == "ae"): #if us military aircraft
-                if(dat["hex"] == str("add66c")):
+                if((dat["hex"] == str("abc591")) or ((dat["hex"][:2] == "ae"))):
                     print("passed check")
                     trig_time = time() + (60*3) #time plus 3 minutes
                     working_dst = float(dat["r_dst"])
